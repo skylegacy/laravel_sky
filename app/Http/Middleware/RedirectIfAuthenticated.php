@@ -18,31 +18,30 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
 
+        switch ($guard){
 
-//        switch ($guard){
-//
-//            case 'admin':
-//
-//                if (Auth::guard($guard)->check()) {
-//                    return redirect('/home');
-//                }
-//                break;
-//
-//            default:
-//
-//                if (Auth::guard($guard)->check()) {
-//                    return redirect('/home');
-//                }
-//                break;
-//
-//        }
+            case 'admin':
 
-        if (Auth::guard($guard)->check()) {
-            $path = $guard ? '/admin' : '/home';
+            if ( !Auth::guard($guard)->user() )
+            {
+                // here you should redirect to login
+            }
 
-            echo 'middleware handler.. '.$path;
-            return redirect($path);
+            echo 'ddddd<br>';
+
+            break;
+
+            default:
+
+                if (Auth::guard($guard)->check()) {
+
+                }
+
+            break;
+
         }
+
+
 
         return $next($request);
     }

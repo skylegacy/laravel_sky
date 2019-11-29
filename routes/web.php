@@ -19,19 +19,31 @@ Route::get('/', function () {
 
 
 Route::prefix('user')->group(function(){
-        Route::get('/test','UserController@test');
+     Route::get('/test','UserController@test');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function(){
+//Route::prefix('admin')->group(function(){
+//
+//    Route::get('home', 'AdminController@showDashboad')->name('admin.home');
+//
+//    Route::get('login', 'AdminController@showLoginForm')->name('admin.login');
+//
+//    Route::post('login', 'Auth\LoginAdminController@login')->name('admin.login');
+//});
 
- Route::get('/', 'AdminController@showLoginForm');
+Route::group([
+    'prefix' => 'admin',
+//    'middleware' => 'auth'
+], function () {
 
-//    Route::get('/',function(){
-//        echo 'admin';
-//    });
+    Route::get('home', 'AdminController@showDashboad')->name('admin.home');
+
+    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+
+    Route::post('login', 'Auth\AdminLoginController@login');
 
 });

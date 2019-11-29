@@ -22,6 +22,7 @@ class UserController extends Controller
         echo '密碼明文:'.$password."<br>";
 
 //        $mysalt = $this->gensalt();
+
         $mysalt = '$2y$10$w/WxpDOhYL30u36X1tqjM.tA3xlMh/WJkam0VRV48ZTMJBUB37RhW';
 
         echo '加鹽: '.$mysalt."<br>";
